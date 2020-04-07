@@ -4,7 +4,6 @@ namespace DefendingCode.Utilities
 {
     public static class Guard
     {
-        //TODO: 07 - Guard 
         public static void ThrowIfNullOrEmpty(string argumentValue, string message, string parameterName)
         {
             if (string.IsNullOrWhiteSpace(argumentValue)) throw new ArgumentException(message, parameterName);
@@ -24,6 +23,11 @@ namespace DefendingCode.Utilities
             if (!success || result < 0) throw new ArgumentException(message, parameterName);
 
             return result;
+        }
+
+        public static void ThrowIfNotPositiveDecimal(decimal argumentValue, string message, string parameterName)
+        {
+            if (argumentValue < 0) throw new ArgumentException(message, parameterName);
         }
     }
 }

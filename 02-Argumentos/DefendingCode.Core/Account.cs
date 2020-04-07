@@ -12,17 +12,17 @@ namespace DefendingCode.Core
         {
             Money = money;
         }
-        //public void ExtractMoney(string moneyToExtract, DateTime dateOfExtract)
-        //{
-        //    decimal moneyToExtractDecimal = decimal.Parse(moneyToExtract);
+        public void ExtractMoney(string moneyToExtract, DateTime dateOfExtract)
+        {
+            decimal moneyToExtractDecimal = decimal.Parse(moneyToExtract);
 
-        //    if (moneyToExtractDecimal > Money)
-        //        return;
-        //    if ((dateOfExtract.DayOfWeek == DayOfWeek.Saturday) || (dateOfExtract.DayOfWeek == DayOfWeek.Sunday))
-        //        return;
+            if (moneyToExtractDecimal > Money)
+                return;
+            if ((dateOfExtract.DayOfWeek == DayOfWeek.Saturday) || (dateOfExtract.DayOfWeek == DayOfWeek.Sunday))
+                return;
 
-        //    Money = Money - moneyToExtractDecimal;
-        //}
+            Money = Money - moneyToExtractDecimal;
+        }
 
 
 
@@ -83,7 +83,7 @@ namespace DefendingCode.Core
         //    if (string.IsNullOrWhiteSpace(moneyToExtract))
         //        throw new ArgumentException("Debe ingresar un monto", nameof(moneyToExtract));
 
-        //    if (dateOfExtract != null && dateOfExtract != DateTime.MinValue)
+        //    if (dateOfExtract != null && dateOfExtract == DateTime.MinValue)
         //        throw new ArgumentException("Debe ingresar una fecha", nameof(dateOfExtract));
 
         //    decimal moneyToExtractDecimal;
@@ -104,31 +104,23 @@ namespace DefendingCode.Core
         //}
 
 
-        public void ExtractMoney(string moneyToExtract, DateTime dateOfExtract)
-        {
-            //TODO: 07 - Utilizar Guards
-            Guard
-            if (string.IsNullOrWhiteSpace(moneyToExtract))
-                throw new ArgumentException("Debe ingresar un monto", nameof(moneyToExtract));
-
-            if (dateOfExtract != null && dateOfExtract != DateTime.MinValue)
-                throw new ArgumentException("Debe ingresar una fecha", nameof(dateOfExtract));
-
-            decimal moneyToExtractDecimal;
-            var success = decimal.TryParse(moneyToExtract, out moneyToExtractDecimal);
-            if (!success) throw new ArgumentException("Formato incorrecto", nameof(moneyToExtract));
-
-            if (moneyToExtractDecimal == 0) throw new ArgumentException("El monto a retirar debe de ser mayor a 0", nameof(moneyToExtract));
+        //public void ExtractMoney(string moneyToExtract, DateTime dateOfExtract)
+        //{
+        //    //TODO: 07 - Utilizar Guards
+        //    Guard.ThrowIfNullOrEmpty(moneyToExtract, "Debe ingresar un monto", nameof(moneyToExtract));
+        //    Guard.ThrowIfNull(dateOfExtract, "Debe ingresar una fecha", nameof(dateOfExtract));
+        //    decimal moneyToExtractDecimal = Guard.ThrowIfNotPositiveDecimal(moneyToExtract, "Formato incorrecto", nameof(moneyToExtract));
 
 
-            if (moneyToExtractDecimal > Money)
-                return;
+        //    if (moneyToExtractDecimal > Money)
+        //        return;
 
 
-            if ((dateOfExtract.DayOfWeek == DayOfWeek.Saturday) || (dateOfExtract.DayOfWeek == DayOfWeek.Sunday))
-                return;
+        //    if ((dateOfExtract.DayOfWeek == DayOfWeek.Saturday) || (dateOfExtract.DayOfWeek == DayOfWeek.Sunday))
+        //        return;
 
-            Money = Money - moneyToExtractDecimal;
-        }
+        //    Money = Money - moneyToExtractDecimal;
+        //}
+
     }
 }
